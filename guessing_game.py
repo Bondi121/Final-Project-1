@@ -5,10 +5,10 @@ from statistics import median
 
 
 attempts_list = []
-print(attempts_list)
+#print(attempts_list)
 
 #Display intro message to the player
-print("Hello, welcome to the game")
+#print("Hello, welcome to the game")
 #Store a random number as the answer
 
 
@@ -27,9 +27,9 @@ def wrong_answer():
     return decision
 
 def play_again():
-    print("The mean was: ", mean(attempts_list), " attempts")
-    print("The median was: ", median(attempts_list)," attempts")
-    print("The mode was: ", mode(attempts_list), " attempts")
+    print("The mean of all your rounds is: ", mean(attempts_list), " attempt(s)")
+    print("The median of all your rounds is: ", median(attempts_list)," attempt(s)")
+    print("The mode of all your attempts is: ", mode(attempts_list), " attempt(s)")
     repeat_game = str(input("Would you like to play again: Y / N: ")).lower()
     while repeat_game not in ["n", "y"]:
         repeat_game = wrong_answer()
@@ -38,7 +38,7 @@ def play_again():
 def start_game():
     attempt = 0
     random_number = random.randint(0, 101)
-    print(random_number)
+    # print(random_number)
     while True:
         #Prompt the player for a guess
         guess_number = try_again()
@@ -57,7 +57,7 @@ def start_game():
         if guess_number == random_number:
             print("you guessed the correct number")
             attempt = attempt + 1
-            print("You had this many attempts:", attempt)
+            print("You had this many attempt(s) in this round:", attempt)
             attempts_list.append(attempt)
             repeat_game = play_again()
             if repeat_game.lower().strip() == "n":
