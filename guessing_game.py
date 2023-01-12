@@ -5,11 +5,7 @@ from statistics import median
 
 
 attempts_list = []
-#print(attempts_list)
-
-#Display intro message to the player
-#print("Hello, welcome to the game")
-#Store a random number as the answer
+print("Hello, welcome to the game.")
 
 
 def try_again():
@@ -27,9 +23,10 @@ def wrong_answer():
     return decision
 
 def play_again():
-    print("The mean of all your rounds is: ", mean(attempts_list), " attempt(s)")
-    print("The median of all your rounds is: ", median(attempts_list)," attempt(s)")
-    print("The mode of all your attempts is: ", mode(attempts_list), " attempt(s)")
+    print(f"The average of all your rounds is: {mean(attempts_list)} attempt(s)")
+    print(f"The median of all your rounds is: {median(attempts_list)} attempt(s)")
+    print(f"The highest attempt of all your rounds is: {mode(attempts_list)} attempt(s)")
+    print(f"Your current highscore is: {min(attempts_list)} attempt(s)")
     repeat_game = str(input("Would you like to play again: Y / N: ")).lower()
     while repeat_game not in ["n", "y"]:
         repeat_game = wrong_answer()
@@ -38,22 +35,20 @@ def play_again():
 def start_game():
     attempt = 0
     random_number = random.randint(0, 101)
-    # print(random_number)
+    print(random_number)
     while True:
-        #Prompt the player for a guess
         guess_number = try_again()
-        #if the guess great than the solution, display "it's lower"
+        if guess_number > 100 or guess_number < 0:
+            print("the number has to be between 0 and 100, please try again")
+            continue
         if guess_number < random_number:
             print("the number is higher...guess again!")
             attempt += 1
-            print(attempt)
             continue
         if guess_number > random_number:
             print("the number is lower...guess again!")
             attempt += 1
-            print(attempt)
             continue
-            #if the guess is less than the solution, display "it's higher"
         if guess_number == random_number:
             print("you guessed the correct number")
             attempt = attempt + 1
@@ -61,17 +56,14 @@ def start_game():
             attempts_list.append(attempt)
             repeat_game = play_again()
             if repeat_game.lower().strip() == "n":
-                break
+                print("Thanks for playing the game!")
+                print(f"Your highscore was: {min(attempts_list)} attempt(s)")
+                quit()
             elif repeat_game.lower().strip() == "y":
                 start_game()
 
-            #Save their attempt to a list
 
 start_game()
 
-#At the end of the game, show the plazer # number of atempts # mean, median, and mode of the saved attempts list
-#ask player if they want to play again
-
-#once the guess is corret, stoop looping, inform the player they got it and show number of attepts
 
 
